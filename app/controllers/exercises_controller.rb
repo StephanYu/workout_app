@@ -2,6 +2,7 @@ class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show]
 
   def index
+    @exercises = Exercise.where(user: current_user)
   end
 
   def show
