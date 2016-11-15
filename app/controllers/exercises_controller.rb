@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: [:show, :edit, :update]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy]
 
   def index
     @exercises = Exercise.where('user_id = ? AND workout_date > ?', current_user, 7.days.ago ).order(workout_date: :desc)
@@ -34,6 +34,16 @@ class ExercisesController < ApplicationController
     else
       flash.now[:alert] = "Exercise has not been updated"
       render :edit
+    end
+  end
+
+  def destroy
+    if @exercise.destroy
+      flash[:notice] = "Exercise has been deleted"
+      redirect_to user_exercises_path(current_user)
+    else
+      flash.now[:alert] = "Exercise has not been deleted"
+      render :destroy
     end
   end
 
