@@ -14,19 +14,18 @@
           <li class="active"><%= link_to "Athletes Den", "#" %></li>
         </ul> 
         <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-            <li class="active"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-            <li><%= link_to "My Lounge", user_exercises_path(current_user) %></li>
+          <% unless user_signed_in? %>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <li><%= link_to "Sign in", new_user_session_path %></li>
           <% else %>
-            <li class="active"><%= link_to "Sign up", new_user_registration_path %></li>
-            <li class="active"><%= link_to "Sign in", new_user_session_path %></li>
+            <li><%= link_to "My Lounge", user_exercises_path(current_user) %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+            <div class="navbar-right signed-in-user">
+              <p class="navbar-text">
+                Signed in as <%= "#{current_user.email}" %>
+              </p>
+            </div>
           <% end %>
-        </ul> 
-        <% if user_signed_in? %>
-          <p class="navbar-text">
-            Signed in as <%= "#{current_user.email}" %> 
-          </p>
-        <% end %>
       </div>
     </div> 
   </nav>
