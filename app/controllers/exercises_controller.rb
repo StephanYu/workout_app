@@ -1,8 +1,8 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: [:show]
+  before_action :set_exercise, only: [:show, :edit, :update]
 
   def index
-    @exercises = Exercise.where(user: current_user)
+    @exercises = Exercise.where('user_id = ? AND workout_date > ?', current_user, 7.days.ago ).order(workout_date: :desc)
   end
 
   def show
@@ -17,10 +17,23 @@ class ExercisesController < ApplicationController
 
     if @exercise.save
       flash[:notice] = "Exercise has been created"
-      redirect_to [current_user, @exercise]
+      redirect_to user_exercise_path(current_user, @exercise)
     else
       flash.now[:alert] = "Exercise has not been created"
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @exercise.update(exercise_params)
+      flash[:notice] = "Exercise successfully updated"
+      redirect_to user_exercise_path(current_user, @exercise)
+    else
+      flash.now[:alert] = "Exercise has not been updated"
+      render :edit
     end
   end
 
