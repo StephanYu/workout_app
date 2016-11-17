@@ -1,6 +1,6 @@
 class DashboardsController < ApplicationController 
   
   def index
-    @members = User.all
+    @members = User.paginate(:page => params[:page])
   end
 end
