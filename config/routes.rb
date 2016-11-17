@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   resources :users do 
     resources :exercises
   end
+
+  resources :dashboards do
+    post :search, on: :collection
+  end
 end
