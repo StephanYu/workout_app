@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :dashboards do
     post :search, on: :collection
   end
+
+  resources :friendships, only: [:show, :create, :destroy]
 end
