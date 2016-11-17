@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Deleting Exercises' do 
   before do 
-    @user = User.create(email: 'test@email.com', password: 'password')
-    @exercise = Exercise.create(duration_in_min: 50, workout: 'Test workout', workout_date: Date.today, user: @user)
+    @user = Fabricate(:user)
     login_as(@user)
   end
 
@@ -12,7 +11,7 @@ RSpec.feature 'Deleting Exercises' do
 
     click_link 'My Lounge'
 
-    path = "/users/#{@user.id}/exercises/#{@exercise.id}"
+    path = "/users/#{@user.id}/exercises/#{@user.exercises.first.id}"
     link = "//a[contains(@href,\'#{path}\') and .//text()='Destroy']"
     
     find(:xpath, link).click

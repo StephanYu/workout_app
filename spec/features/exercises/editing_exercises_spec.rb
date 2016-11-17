@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Editing Exercises' do 
   before do 
-    @user = User.create(email: 'test@email.com', password: 'password')
-    @exercise = Exercise.create(duration_in_min: 50, workout: 'Test workout', workout_date: Date.today, user: @user)
+    @user = Fabricate(:user)
     login_as(@user)
   end
 
@@ -12,7 +11,7 @@ RSpec.feature 'Editing Exercises' do
 
     click_link 'My Lounge'
 
-    path = "/users/#{@user.id}/exercises/#{@exercise.id}/edit"
+    path = "/users/#{@user.id}/exercises/#{@user.exercises.first.id}/edit"
     link = "a[href=\'#{path}\']"
     find(link).click
 
