@@ -36,7 +36,7 @@ RSpec.feature 'Listing Exercises' do
 
   scenario 'shows a list of the users friends' do 
     @friend = Fabricate(:user)
-    Friendship.create(user: @user, friend: @friend)
+    @friendship = Fabricate(:friendship, user: @user, friend: @friend)
     
     visit root_path
 
