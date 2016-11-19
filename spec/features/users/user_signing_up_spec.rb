@@ -14,6 +14,11 @@ RSpec.feature 'User signs up' do
 
     expect(page).to have_content('You have signed up successfully')
 
+    user = User.last
+    room = user.room
+    chat_room_name = "#{user.first_name}-#{user.last_name}"
+    expect(room.name).to eq(chat_room_name)
+
     visit root_path
     expect(page).to have_content('Adam Test')
   end  
