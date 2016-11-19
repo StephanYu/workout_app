@@ -9,6 +9,13 @@ class FriendshipsController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    @friend = Friendship.find(params[:id]).friend
+    @exercises = @friend.exercises
+  end
+
+  private
+
   def friendship_params
     params.permit(:friend_id, :user_id)
   end

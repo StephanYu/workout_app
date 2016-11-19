@@ -19,11 +19,11 @@ gem 'will_paginate-bootstrap', '~>1.0.1'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '3.1.0'
+  gem 'fabrication'
 end
 
 group :test do
   gem 'capybara', '2.7.1'
-  gem 'fabrication'
   gem 'faker'
 end
 
