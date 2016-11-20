@@ -17,7 +17,7 @@ gem 'd3-rails', '4.1.0'
 gem 'will_paginate-bootstrap', '~>1.0.1'
 
 group :development, :test do
-  gem 'byebug', platform: :mri
+  gem 'pry-byebug'
   gem 'rspec-rails', '3.1.0'
   gem 'fabrication'
 end
